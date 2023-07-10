@@ -32,6 +32,10 @@ const typeDefs = gql`
     title: String!
   }
 
+  type Query {
+    user: User
+  }
+
 `;
 
 
