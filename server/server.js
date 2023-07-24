@@ -7,7 +7,7 @@ const { typeDefs, resolvers } = require('./schemas');
 
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 
 const server = new ApolloServer({
@@ -20,14 +20,15 @@ const server = new ApolloServer({
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// if we're in production, serve client/build as static assets
-// if (process.env.NODE_ENV === 'production') {
-//   app.use(express.static(path.join(__dirname, '../client/build')));
-// }
 
-// app.get('/', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../client/'));
-// })
+//if we're in production, serve client/build as static assets
+if ("process.env.NODE_ENV === 'production'") {
+  app.use(express.static(path.join(__dirname, '../client/build')));
+}
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/'));
+})
 
 const startApolloServer = async () => {
   await server.start();
